@@ -3,11 +3,13 @@
     tools:context="com.mirka.app.ghmarket.activities.store.fragments.SearchFragment">
 
     <LinearLayout
+        android:background="@color/m_gray"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <SearchView
+            android:iconifiedByDefault="false"
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -15,10 +17,11 @@
             android:background="@color/white.main" />
 
         <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="8dp"
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
+            android:padding="8dp"
             android:layout_weight="1" />
 
 

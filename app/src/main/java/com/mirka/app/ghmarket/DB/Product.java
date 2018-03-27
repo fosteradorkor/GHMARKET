@@ -102,6 +102,10 @@ public class Product extends ParseObject {
 
     }
 
+    public static void search(String s, FindCallback<Product> callback) {
+        getQuery().whereMatches(KEY_TITLE, "("+s+")", "i").findInBackground(callback);
+    }
+
     //    title
     public String getTitle() {
         return getString(KEY_TITLE);
@@ -204,9 +208,8 @@ public class Product extends ParseObject {
         put(KEY_PRODUCT_SIZES, value);
     }
 
+
     public interface OnComplete {
         void complete(Product p, Exception e);
     }
-
-
 }
