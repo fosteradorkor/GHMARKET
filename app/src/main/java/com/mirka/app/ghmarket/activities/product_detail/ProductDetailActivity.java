@@ -1,11 +1,8 @@
 package com.mirka.app.ghmarket.activities.product_detail;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,6 +21,7 @@ import com.mirka.app.ghmarket.activities.store.adapters.HomeGroupRecyclerAdapter
 import com.mirka.app.ghmarket.databinding.ActivityProductActivityBinding;
 import com.mirka.app.ghmarket.misc.BindingViewHolder;
 import com.mirka.app.ghmarket.misc.Util;
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
 import com.squareup.picasso.Picasso;
@@ -38,7 +36,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     ActivityProductActivityBinding layout;
     String product_id = null;
 
-    ProductDetailViewModel model;
 
     //size and color
     int selected_size = -1;
@@ -58,8 +55,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         if (product_id == null) {
             finish();
         }
-
-        model = ViewModelProviders.of(this).get(ProductDetailViewModel.class);
 
     }
 
@@ -81,11 +76,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
         layout.toolbar.setOnMenuItemClickListener(Util.toolBarNavItemActions(this));
 
-        model.getProduct(product_id).observe(this, new Observer<Product>() {
+        Product.getById(product_id, new Product.OnComplete() {
             @Override
-            public void onChanged(@Nullable final Product product) {
+            public void complete(final Product product, Exception e) {
 
-//              product  databinding
+                if (e!=null) return;
+//                product  databinding
                 layout.setProduct(product);
 
 
@@ -104,10 +100,12 @@ public class ProductDetailActivity extends AppCompatActivity {
                     layout.listColors.setAdapter(new VariationRecyclerAdapter(product.getColors(), R.layout.recycler_item_variation_color));
 
                 //recommended products
-                model.getSimilarProducts(product).observe(ProductDetailActivity.this, new Observer<List<Product>>() {
+                Product.getSimilarProducts(product).findInBackground(new FindCallback<Product>() {
                     @Override
-                    public void onChanged(@Nullable List<Product> products) {
-                        layout.rvRecommended.setAdapter(new HomeGroupRecyclerAdapter(products, ProductDetailActivity.this));
+                    public void done(List<Product> products, ParseException e) {
+                        if (e == null)
+                            layout.rvRecommended.setAdapter(new HomeGroupRecyclerAdapter(products, ProductDetailActivity.this));
+
                     }
                 });
 

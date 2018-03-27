@@ -66,7 +66,7 @@ public class StoreActivity extends AppCompatActivity {
         //syncing bottom nav
         // TODO: 3/27/2018 this is redundant change signature of #switchFragment to switchFragment(int position)
         int position = 0;
-        switch (tag){
+        switch (tag) {
             case HomeFragment.TAG:
                 position = 0;
                 break;
@@ -93,12 +93,11 @@ public class StoreActivity extends AppCompatActivity {
         boolean switched = switchFragment(fragmentAdapter.getItem(0), (String) fragmentAdapter.getPageTitle(0));
         if (!switched) {
             finish();
-        }else{
+        } else {
             layout.navigation.setSelectedIndex(0, true);
 
         }
     }
-
 
 
 }

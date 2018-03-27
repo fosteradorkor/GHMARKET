@@ -7,8 +7,10 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import bolts.Continuation;
@@ -192,7 +194,10 @@ public class Product extends ParseObject {
 
     // product colors
     public List<String> getColors() {
-        return getList(KEY_PRODUCT_COLORS);
+        List<String> list = getList(KEY_PRODUCT_COLORS);
+        if (list == null)
+            return new ArrayList<>();
+        return list;
     }
 
     public void setColors(List<String> value) {
@@ -200,8 +205,12 @@ public class Product extends ParseObject {
     }
 
     // product sizes
+    @NotNull
     public List<String> getSizes() {
-        return getList(KEY_PRODUCT_SIZES);
+        List<String> list = getList(KEY_PRODUCT_SIZES);
+        if (list ==null)
+            return new ArrayList<>();
+        return list;
     }
 
     public void setSizes(List<String> value) {
