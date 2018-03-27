@@ -85,6 +85,14 @@ public class BagFragment extends Fragment {
 
             }
         });
+
+        //nav
+        layout.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
     }
 
 

@@ -85,18 +85,16 @@
                 </FrameLayout>
 
                 <android.support.v7.widget.RecyclerView
-                    android:nestedScrollingEnabled="false"
                     android:id="@+id/recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:nestedScrollingEnabled="false" />
 
             </LinearLayout>
 
 
         </android.support.v4.widget.NestedScrollView>
-
-
 
 
     </LinearLayout>

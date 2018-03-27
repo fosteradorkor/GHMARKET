@@ -27,7 +27,9 @@ public class TypeStyleFragment extends Fragment {
     public static final String TAG = "type_style";
     FragmentTypeStyleBinding layout;
 
-    String style= null, type = null;
+    String style = null, type = null;
+    private List<Product> products = null;
+    private String title = "EXPLORE";
 
     public TypeStyleFragment() {
         // Required empty public constructor
@@ -56,20 +58,24 @@ public class TypeStyleFragment extends Fragment {
     }
 
     private void setup() {
-        if (getArguments()!=null) {
-             type = getArguments().getString(Product.KEY_PRODUCT_TYPE, null);
-             style = getArguments().getString(Product.KEY_PRODUCT_STYLE, null);
+        if (getArguments() != null) {
+            type = getArguments().getString(Product.KEY_PRODUCT_TYPE, null);
+            style = getArguments().getString(Product.KEY_PRODUCT_STYLE, null);
         }
 
         //title
         if (type != null)
             layout.toolbar.setTitle(type.toUpperCase());
         else //exploring
-            layout.toolbar.setTitle("EXPLORE");
+            layout.toolbar.setTitle(this.title);
+
+        //removing navigaition
+        if (type == null && style == null)
+            layout.toolbar.setNavigationIcon(null);
+
 
         Util.setUpToolbar(layout.toolbar);
         layout.toolbar.setOnMenuItemClickListener(Util.toolBarNavItemActions(getActivity()));
-        layout.toolbar.setNavigationIcon(null);
 
         //nav
         layout.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -79,17 +85,38 @@ public class TypeStyleFragment extends Fragment {
             }
         });
 
-        Product.getProducts(style, type, new FindCallback<Product>() {
-            @Override
-            public void done(List<Product> objects, ParseException e) {
-                if (e == null) {
-//                    successfull query
-                    layout.recycler.setLayoutManager(new GridLayoutManager(getContext(), 3));
-                    layout.recycler.setAdapter(new HomeGroupRecyclerAdapter(objects, getContext(), true));
 
-                }
-            }
-        });
+        setupRecycler();
+
     }
 
+    private void setupRecycler() {
+        layout.recycler.setLayoutManager(new GridLayoutManager(getContext(), 3));
+
+        if (this.products == null) {     //products are already set
+            Product.getProducts(style, type, new FindCallback<Product>() {
+                @Override
+                public void done(List<Product> objects, ParseException e) {
+                    if (e == null) {
+//                    successfull query
+                        layout.recycler.setAdapter(new HomeGroupRecyclerAdapter(objects, getContext(), true));
+
+                    }
+                }
+            });
+        } else {
+            layout.recycler.setAdapter(new HomeGroupRecyclerAdapter(this.products, getContext(), true));
+        }
+    }
+
+
+    /**
+     * sets up the products => no extra queries are required
+     * @param products
+     */
+    public void setProducts(List<Product> products, String title) {
+        this.products = products;
+        this.title = title.toUpperCase();
+
+    }
 }

@@ -56,7 +56,8 @@
         <activity android:name=".activities.product_detail.ProductDetailActivity" />
         <activity android:name=".activities.checkout.CheckoutActivity" />
         <activity android:name=".activities.account.AccountActivity" />
-        <activity android:name=".activities.account.NotificationsActivity"></activity>
+        <activity android:name=".activities.account.NotificationsActivity" />
+        <activity android:name=".activities.account.PurchasesActivity"></activity>
     </application>
 
 </manifest>

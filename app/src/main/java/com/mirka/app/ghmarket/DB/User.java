@@ -2,6 +2,9 @@ package com.mirka.app.ghmarket.DB;
 
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Foster on 3/20/2018.
  */
@@ -9,11 +12,16 @@ import com.parse.ParseUser;
 public class User extends ParseUser {
 
 
-    private static final String  KEY_PROFILE_IMAGE = "profile_image";
+    private static final String KEY_PROFILE_IMAGE = "profile_image";
     private static final String KEY_USER_NAME = "user_name";
     private static final String KEY_NOTIFICATION_OFFERS = "notification_offers";
     private static final String KEY_NOTIFICATION_ALERTS = "notification_alerts";
     private static final String KEY_NOTIFICATION_FAVORITES = "notification_favorites";
+    private static final String KEY_FAVORITES = "favorites";
+
+    public static User getCurrentUser() {
+        return ((User) ParseUser.getCurrentUser());
+    }
 
     //    name
     public String getName() {
@@ -24,13 +32,13 @@ public class User extends ParseUser {
         put(KEY_USER_NAME, value);
     }
 
+    public String getProfileImage() {
+        return getString(KEY_PROFILE_IMAGE);
+    }
+
     //     profile image
     public void setProfileImage(String value) {
         put(KEY_PROFILE_IMAGE, value);
-    }
-
-    public String getProfileImage() {
-     return   getString(KEY_PROFILE_IMAGE);
     }
 
     //    email
@@ -44,28 +52,43 @@ public class User extends ParseUser {
     }
 
     //  notification settings
-    public boolean getNotificationOffers(){
+    public boolean getNotificationOffers() {
         return getBoolean(KEY_NOTIFICATION_OFFERS);
     }
 
-    public void setNotificationOffers(boolean value){put(KEY_NOTIFICATION_OFFERS, value);}
+    public void setNotificationOffers(boolean value) {
+        put(KEY_NOTIFICATION_OFFERS, value);
+    }
 
-     public boolean getNotificationAlerts(){
+    public boolean getNotificationAlerts() {
         return getBoolean(KEY_NOTIFICATION_ALERTS);
     }
 
-    public void setNotificationAlerts(boolean value){put(KEY_NOTIFICATION_ALERTS, value);}
+    public void setNotificationAlerts(boolean value) {
+        put(KEY_NOTIFICATION_ALERTS, value);
+    }
 
-     public boolean getNotificationFavorites(){
+    public boolean getNotificationFavorites() {
         return getBoolean(KEY_NOTIFICATION_FAVORITES);
     }
 
-    public void setNotificationFavorites(boolean value){put(KEY_NOTIFICATION_FAVORITES, value);}
+    public void setNotificationFavorites(boolean value) {
+        put(KEY_NOTIFICATION_FAVORITES, value);
+    }
 
+    public List<Product> getFavorites() {
+        List<Product> favorites = getList(KEY_FAVORITES);
+        if (favorites == null)
+            return new ArrayList<>();
+        return favorites;
+    }
 
+    public void addToFavorites(Product product) {
+        List<Product> favorites = getFavorites();
 
-    public static User getCurrentUser(){
-        return ((User) ParseUser.getCurrentUser());
+        favorites.add(product);
+
+        put(KEY_FAVORITES, favorites);
     }
 
 

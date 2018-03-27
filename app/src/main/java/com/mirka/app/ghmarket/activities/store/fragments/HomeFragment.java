@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             public void complete(final List<Category> categories, Exception e) {
 
                 if (categories != null) {
-                    adapter = new HomeRecyclerAdapter(getContext(), categories);
+                    adapter = new HomeRecyclerAdapter(HomeFragment.this, categories);
                     layout.recycler.setAdapter(adapter);
                 }
             }

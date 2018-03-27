@@ -89,6 +89,7 @@ public class AccountActivity extends AppCompatActivity {
                                     }
                                 });
                             } else {
+                                alert.dismiss();
                                 Toast.makeText(AccountActivity.this, "Changes saved successfully", Toast.LENGTH_SHORT).show();
                             }
                         }
