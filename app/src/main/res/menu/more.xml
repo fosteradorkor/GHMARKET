@@ -10,6 +10,9 @@
         android:id="@+id/context_purchases"
         android:title="@string/purchases" />
     <item
+        android:id="@+id/context_notification"
+        android:title="@string/settings" />
+    <item
         android:id="@+id/context_account"
         android:title="@string/profile" />
     <item

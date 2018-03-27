@@ -15,6 +15,8 @@ import com.mirka.app.ghmarket.R;
 public class CategoryFragment extends Fragment {
 
 
+    public static final String TAG = "tag_category";
+
     public CategoryFragment() {
         // Required empty public constructor
     }

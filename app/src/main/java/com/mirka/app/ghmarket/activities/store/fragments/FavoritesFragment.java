@@ -14,6 +14,8 @@ import com.mirka.app.ghmarket.R;
 public class FavoritesFragment extends Fragment {
 
 
+    public static final String TAG = "tag_favorites";
+
     public FavoritesFragment() {
         // Required empty public constructor
     }

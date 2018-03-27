@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.mirka.app.ghmarket.App;
 import com.mirka.app.ghmarket.DB.Order;
 import com.mirka.app.ghmarket.R;
+import com.mirka.app.ghmarket.activities.store.fragments.CategoryFragment;
 import com.mirka.app.ghmarket.activities.store.fragments.ExploreFragment;
 import com.mirka.app.ghmarket.activities.store.fragments.FavoritesFragment;
 import com.mirka.app.ghmarket.activities.store.fragments.HomeFragment;
@@ -44,9 +45,9 @@ public class StoreActivity extends AppCompatActivity {
         layout = DataBindingUtil.setContentView(this, R.layout.activity_store);
 
         fragmentAdapter.addFragment(new HomeFragment(), HomeFragment.TAG);
-        fragmentAdapter.addFragment(new SearchFragment(), HomeFragment.TAG);
-        fragmentAdapter.addFragment(new ExploreFragment(), HomeFragment.TAG);
-        fragmentAdapter.addFragment(new FavoritesFragment(), HomeFragment.TAG);
+        fragmentAdapter.addFragment(new SearchFragment(), SearchFragment.TAG);
+        fragmentAdapter.addFragment(new CategoryFragment(), CategoryFragment.TAG);
+        fragmentAdapter.addFragment(new FavoritesFragment(), FavoritesFragment.TAG);
 
         switchFragment(fragmentAdapter.getItem(0));
 

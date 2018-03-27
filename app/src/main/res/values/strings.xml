@@ -63,4 +63,5 @@
     <string name="PRODUCTION_APP_ID">ghmarket</string>
     <string name="profile">Profile</string>
     <string name="purchases">Orders</string>
+    <string name="settings">Settings</string>
 </resources>

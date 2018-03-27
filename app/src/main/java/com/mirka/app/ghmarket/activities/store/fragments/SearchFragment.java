@@ -15,6 +15,8 @@ import com.mirka.app.ghmarket.R;
 public class SearchFragment extends Fragment {
 
 
+    public static final String TAG = "tag_search";
+
     public SearchFragment() {
         // Required empty public constructor
     }

@@ -57,7 +57,11 @@ public class TypeStyleFragment extends Fragment {
         String style = getArguments().getString(Product.KEY_PRODUCT_STYLE, null);
 
         //title
-        layout.toolbar.setTitle(type.toUpperCase());
+        if (type != null)
+            layout.toolbar.setTitle(type.toUpperCase());
+        else //exploring
+            layout.toolbar.setTitle("EXPLORE");
+
         Util.setUpToolbar(layout.toolbar);
         layout.toolbar.setOnMenuItemClickListener(Util.toolBarNavItemActions(getActivity()));
 
