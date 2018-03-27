@@ -2,10 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="user"
+            type="com.mirka.app.ghmarket.DB.User" />
+    </data>
+
     <LinearLayout
-        android:background="@color/white.main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white.main"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -23,15 +30,94 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="wrap_content"
+            android:padding="8dp">
 
             <TextView
-                android:text="Sales Alerts"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Sales Alerts"
+                android:textColor="@color/black.main"
+                android:textSize="18sp" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Switch
+                android:id="@+id/switcher_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{user.notificationAlerts}" />
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/m_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Special Offers"
+                android:textColor="@color/black.main"
+                android:textSize="18sp" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Switch
+                android:id="@+id/switcher_offers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{user.notificationOffers}" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/m_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alerts on Favorites"
+                android:textColor="@color/black.main"
+                android:textSize="18sp" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Switch
+                android:id="@+id/switcher_favorites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{user.notificationFavorites}" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/m_gray" />
+
 
     </LinearLayout>
 </layout>
