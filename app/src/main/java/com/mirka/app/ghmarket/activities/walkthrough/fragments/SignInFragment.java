@@ -66,6 +66,7 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
 
         layout.btnSignUp.setOnClickListener(this);
         layout.btnSignIn.setOnClickListener(this);
+        layout.btnFbSignIn.setOnClickListener(this);
     }
 
     @Override

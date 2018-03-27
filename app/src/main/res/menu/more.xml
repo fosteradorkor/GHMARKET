@@ -6,9 +6,9 @@
         android:icon="@drawable/ic_menu_cart"
         android:title="@string/store"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/context_purchases"
-        android:title="@string/purchases" />
+    <!--<item-->
+        <!--android:id="@+id/context_purchases"-->
+        <!--android:title="@string/purchases" />-->
     <item
         android:id="@+id/context_notification"
         android:title="@string/settings" />

@@ -3,12 +3,13 @@ package com.mirka.app.ghmarket.misc;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.graphics.Paint;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
 import com.mirka.app.ghmarket.DB.Product;
+import com.mirka.app.ghmarket.DB.User;
 import com.mirka.app.ghmarket.R;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
@@ -71,5 +72,12 @@ public class BindingAdapters {
                     c.getString(R.string.ghc, new DecimalFormat("#.00").format(product.getDiscountedPrice()))
             );
         }
+    }
+
+    @BindingAdapter("isFavorite")
+    public static void favorite(ImageButton imgButton, Product product) {
+
+
+
     }
 }

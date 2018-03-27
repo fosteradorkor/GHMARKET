@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mirka.app.ghmarket.DB.User;
 import com.mirka.app.ghmarket.R;
 
 
@@ -31,5 +32,15 @@ public class FavoritesFragment extends Fragment {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ExplorerFragment fragment = new ExplorerFragment();
+        fragment.setProducts(User.getCurrentUser().getFavorites(), "FAVORITES");
 
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
 }

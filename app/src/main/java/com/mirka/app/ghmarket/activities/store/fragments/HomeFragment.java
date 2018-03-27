@@ -106,7 +106,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
 
         }
-        TypeStyleFragment typeStyleFragment = new TypeStyleFragment();
+        ExplorerFragment typeStyleFragment = new ExplorerFragment();
         Bundle b = new Bundle();
         b.putString(Product.KEY_PRODUCT_TYPE, type);
         typeStyleFragment.setArguments(b);

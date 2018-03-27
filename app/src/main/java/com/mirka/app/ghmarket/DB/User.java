@@ -92,4 +92,15 @@ public class User extends ParseUser {
     }
 
 
+    public void removeFromFavorites(Product product) {
+        List<Product> favorites = getFavorites();
+        for (int i = 0; i < favorites.size(); i++) {
+            if (favorites.get(i).getObjectId().equals(product.getObjectId())) {
+                favorites.remove(i);
+                put(KEY_FAVORITES, favorites);
+                saveInBackground();
+                return;
+            }
+        }
+    }
 }

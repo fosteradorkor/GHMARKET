@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TypeStyleFragment extends Fragment {
+public class ExplorerFragment extends Fragment {
 
     public static final String TAG = "type_style";
     FragmentTypeStyleBinding layout;
@@ -31,7 +31,7 @@ public class TypeStyleFragment extends Fragment {
     private List<Product> products = null;
     private String title = "EXPLORE";
 
-    public TypeStyleFragment() {
+    public ExplorerFragment() {
         // Required empty public constructor
     }
 
@@ -93,7 +93,7 @@ public class TypeStyleFragment extends Fragment {
     private void setupRecycler() {
         layout.recycler.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
-        if (this.products == null) {     //products are already set
+        if (this.products == null) {     //products are NOT set
             Product.getProducts(style, type, new FindCallback<Product>() {
                 @Override
                 public void done(List<Product> objects, ParseException e) {

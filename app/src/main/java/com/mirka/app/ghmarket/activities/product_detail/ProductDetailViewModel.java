@@ -18,14 +18,12 @@ class ProductDetailViewModel extends ViewModel {
 
     public LiveData<Product> getProduct(String productId) {
 
-
         Product.getById(productId, new Product.OnComplete() {
             @Override
             public void complete(Product p, Exception e) {
                 if (p!=null) product.postValue(p);
             }
         });
-
 
         return product;
     }

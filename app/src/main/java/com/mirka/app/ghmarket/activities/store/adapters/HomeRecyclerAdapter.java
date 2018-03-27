@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.mirka.app.ghmarket.DB.Category;
 import com.mirka.app.ghmarket.R;
-import com.mirka.app.ghmarket.activities.store.fragments.TypeStyleFragment;
+import com.mirka.app.ghmarket.activities.store.fragments.ExplorerFragment;
 import com.mirka.app.ghmarket.databinding.RecyclerItemCategoryGroupBinding;
 import com.mirka.app.ghmarket.misc.BindingViewHolder;
 import com.mirka.app.ghmarket.misc.LinearSpacingItemDecoration;
@@ -83,7 +83,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<BindingViewHolder>
             @Override
             public void onClick(View view) {
 
-                TypeStyleFragment fragment = new TypeStyleFragment();
+                ExplorerFragment fragment = new ExplorerFragment();
                 fragment.setProducts(category.getProducts(), category.getTitle());
 
                 context.getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container, fragment)

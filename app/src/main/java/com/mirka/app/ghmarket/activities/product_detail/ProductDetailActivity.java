@@ -18,6 +18,7 @@ import com.mirka.app.ghmarket.BR;
 import com.mirka.app.ghmarket.DB.Order;
 import com.mirka.app.ghmarket.DB.Product;
 import com.mirka.app.ghmarket.DB.Purchase;
+import com.mirka.app.ghmarket.DB.User;
 import com.mirka.app.ghmarket.R;
 import com.mirka.app.ghmarket.activities.store.adapters.HomeGroupRecyclerAdapter;
 import com.mirka.app.ghmarket.databinding.ActivityProductActivityBinding;
@@ -58,9 +59,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             finish();
         }
 
-
         model = ViewModelProviders.of(this).get(ProductDetailViewModel.class);
-
 
     }
 
@@ -87,6 +86,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
 //              product  databinding
                 layout.setProduct(product);
+
 
                 layout.carousel.setImageListener(new ImageListener() {
                     @Override
@@ -144,15 +144,54 @@ public class ProductDetailActivity extends AppCompatActivity {
                     }
                 });
 
+                layout.isFavorite.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        User currentUser = User.getCurrentUser();
+                        if (isFavorite(product))
+                            currentUser.removeFromFavorites(product);
+                        else
+                            currentUser.addToFavorites(product);
+
+                        //updating records
+                        currentUser.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    layout.isFavorite.setImageResource(isFavorite(product) ? R.drawable.ic_ios_heart : R.drawable.ic_ios_heart_outline);
+                                }
+                            }
+                        });
+
+                    }
+                });
 
                 //update toolbar
                 Util.setUpToolbar(layout.toolbar);
 
+                layout.isFavorite.setImageResource(isFavorite(product) ? R.drawable.ic_ios_heart : R.drawable.ic_ios_heart_outline);
 
             }
         });
 
 
+    }
+
+    /**
+     * che
+     *
+     * @param product
+     * @return
+     */
+    private boolean isFavorite(Product product) {
+        List<Product> favorites = User.getCurrentUser().getFavorites();
+
+        for (Product favorite : favorites) {
+            if (favorite.getObjectId().equals(product.getObjectId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

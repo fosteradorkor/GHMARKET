@@ -162,8 +162,7 @@ public class Util {
                     case R.id.context_account:
                         context.startActivity(new Intent(context, AccountActivity.class));
                         return true;
-                    case R.id.context_purchases:
-                        return true;
+
                     case R.id.context_notification:
                         context.startActivity(new Intent(context, NotificationsActivity.class));
                         return true;
