@@ -61,4 +61,6 @@
     <string name="fb_login_protocol_scheme">fb190286125082812</string>
     <string name="PRODUCTION_APP_SERVER">https://foster-ghmarket.herokuapp.com/parse</string>
     <string name="PRODUCTION_APP_ID">ghmarket</string>
+    <string name="profile">Profile</string>
+    <string name="purchases">Orders</string>
 </resources>

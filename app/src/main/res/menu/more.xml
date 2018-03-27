@@ -2,10 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        app:showAsAction="always"
-        android:icon="@drawable/ic_menu_cart"
         android:id="@+id/context_bag"
-        android:title="@string/store" />
+        android:icon="@drawable/ic_menu_cart"
+        android:title="@string/store"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/context_purchases"
+        android:title="@string/purchases" />
+    <item
+        android:id="@+id/context_account"
+        android:title="@string/profile" />
     <item
         android:id="@+id/context_logout"
         android:title="@string/logout" />

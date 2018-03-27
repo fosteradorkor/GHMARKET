@@ -26,8 +26,8 @@ public class User extends ParseUser {
         put(KEY_PROFILE_IMAGE, value);
     }
 
-    public void getProfileImage() {
-        getString(KEY_PROFILE_IMAGE);
+    public String getProfileImage() {
+     return   getString(KEY_PROFILE_IMAGE);
     }
 
     //    email

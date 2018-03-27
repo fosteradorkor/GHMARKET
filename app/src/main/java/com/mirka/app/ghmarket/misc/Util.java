@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.mirka.app.ghmarket.DB.Order;
 import com.mirka.app.ghmarket.DB.User;
 import com.mirka.app.ghmarket.R;
+import com.mirka.app.ghmarket.activities.account.AccountActivity;
 import com.mirka.app.ghmarket.activities.checkout.CheckoutActivity;
 import com.mirka.app.ghmarket.databinding.LayoutSlideBinding;
 import com.synnapps.carouselview.ViewListener;
@@ -156,6 +157,11 @@ public class Util {
                     case R.id.context_logout:
                         User.logOut();
                         context.finish();
+                        return true;
+                    case R.id.context_account:
+                        context.startActivity(new Intent(context, AccountActivity.class));
+                        return true;
+                    case R.id.context_purchases:
                         return true;
                 }
 

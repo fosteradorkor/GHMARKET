@@ -83,7 +83,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     //facebook
-    compile ("com.parse:parsefacebookutils-v4-android:1.10.3@aar"){
+    compile("com.parse:parsefacebookutils-v4-android:1.10.3@aar") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
@@ -117,6 +117,9 @@ dependencies {
 
     //bottom navigation
     api 'it.sephiroth.android.library.bottomnavigation:bottom-navigation:2.0.1-rc1'
+
+    //circualr image view
+    compile 'de.hdodenhof:circleimageview:2.2.0'
 
 
 }

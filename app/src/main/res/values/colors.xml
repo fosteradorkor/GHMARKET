@@ -10,4 +10,5 @@
     <color name="black.main">#000</color>
     <color name="black.sub">#dfdfdf</color>
     <color name="facebook_bg">#3b5997</color>
+    <color name="m_gray">#d9d9d9</color>
 </resources>
