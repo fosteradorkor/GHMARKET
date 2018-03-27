@@ -97,6 +97,7 @@ public class Product extends ParseObject {
         if (style != null) query.whereEqualTo(KEY_PRODUCT_STYLE, style);
         if (type != null) query.whereEqualTo(KEY_PRODUCT_TYPE, type);
 
+
         query.findInBackground(callback);
 
     }

@@ -6,6 +6,8 @@ import android.graphics.Paint;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
 import com.mirka.app.ghmarket.DB.Product;
 import com.mirka.app.ghmarket.R;
 import com.squareup.picasso.Picasso;
@@ -35,7 +37,7 @@ public class BindingAdapters {
 
     @BindingAdapter("imgUrl")
     public static void setImage(ImageView imageView, String url) {
-        Picasso.get().load(url).into(imageView);
+        Glide.with(imageView.getContext()).load(url).into(imageView);
     }
 
     @BindingAdapter("carouselImgs")

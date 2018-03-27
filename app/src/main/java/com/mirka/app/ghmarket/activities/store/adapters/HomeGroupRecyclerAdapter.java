@@ -22,14 +22,21 @@ import java.util.List;
  */
 
 public class HomeGroupRecyclerAdapter extends RecyclerView.Adapter<BindingViewHolder> {
+    public static final int MAX_RESULTS_PER_ROW = 5;
     private List<Product> products;
     private Context context;
-    public static final int MAX_RESULTS_PER_ROW = 5;
+    private boolean no_limit = false;
 
 
     public HomeGroupRecyclerAdapter(List<Product> products, Context context) {
         this.products = products;
         this.context = context;
+    }
+
+    public HomeGroupRecyclerAdapter(List<Product> products, Context context, boolean no_limit) {
+        this.products = products;
+        this.context = context;
+        this.no_limit = true;
     }
 
     @Override
@@ -44,37 +51,59 @@ public class HomeGroupRecyclerAdapter extends RecyclerView.Adapter<BindingViewHo
     }
 
     @Override
+    public void onViewRecycled(BindingViewHolder holder) {
+        super.onViewRecycled(holder);
+    }
+
+    @Override
     public int getItemViewType(int position) {
         return R.layout.recycler_item_product;
     }
 
     @Override
     public int getItemCount() {
+        if (no_limit)
+            return products.size();
+
         return products.size() > MAX_RESULTS_PER_ROW ? MAX_RESULTS_PER_ROW : products.size();
     }
 
     void bind(final RecyclerItemProductBinding holder, final Product product) {
 
-
-        Product.getById(product.getObjectId(), new Product.OnComplete() {
-            @Override
-            public void complete(final Product p, Exception e) {
-                if (p != null) {
-                    holder.setProduct(p);
-                    holder.getRoot().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Bundle b = new Bundle();
-                            b.putString(ProductDetailActivity.PRODUCT_ID, p.getObjectId());
-                            Intent i = new Intent(context, ProductDetailActivity.class);
-                            i.putExtras(b);
-                            context.startActivity(i);
-                        }
-                    });
+        if (product.isDataAvailable()) {
+            holder.setProduct(product);
+            holder.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle b = new Bundle();
+                    b.putString(ProductDetailActivity.PRODUCT_ID, product.getObjectId());
+                    Intent i = new Intent(context, ProductDetailActivity.class);
+                    i.putExtras(b);
+                    context.startActivity(i);
                 }
-            }
-        });
+            });
+
+        } else          //data unavailable => query
+            Product.getById(product.getObjectId(), new Product.OnComplete() {
+                @Override
+                public void complete(final Product p, Exception e) {
+                    if (p != null) {
+                        holder.setProduct(p);
+                        holder.getRoot().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Bundle b = new Bundle();
+                                b.putString(ProductDetailActivity.PRODUCT_ID, p.getObjectId());
+                                Intent i = new Intent(context, ProductDetailActivity.class);
+                                i.putExtras(b);
+                                context.startActivity(i);
+                            }
+                        });
+                    }
+                }
+            });
 
 
     }
+
 }

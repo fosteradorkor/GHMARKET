@@ -8,13 +8,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.mirka.app.ghmarket.DB.User;
 import com.mirka.app.ghmarket.R;
 import com.mirka.app.ghmarket.databinding.FragmentSignInBinding;
 import com.mirka.app.ghmarket.misc.CustomAlert;
 import com.mirka.app.ghmarket.misc.Util;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +34,8 @@ import com.parse.ParseUser;
 public class SignInFragment extends Fragment implements View.OnClickListener {
 
     public static final String TAG = SignUpFragment.class.getName();
+    final List<String> permissions = Arrays.asList("public_profile", "email");
+
 
     FragmentSignInBinding layout;
     CustomAlert alert;
@@ -67,6 +81,12 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
                 //email login
                 login();
                 break;
+
+            case R.id.btn_fb_sign_in:
+                facebookSignup();
+                break;
+
+
         }
     }
 
@@ -103,6 +123,31 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    private void facebookSignup() {
+        ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(), permissions, new LogInCallback() {
+            @Override
+            public void done(ParseUser user, ParseException e) {
+
+                alert = new CustomAlert(getContext());
+                alert.setTitle("Creating account");
+                alert.setType(CustomAlert.PROGRESS);
+
+
+                if (user == null) {
+
+//                    Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
+//                    unable to signin
+                } else if (user.isNew()) {
+                    //new user
+                    getUserDetailFromFB();
+                } else {
+                    //existing user
+                    getUserDetailFromFB();
+                }
+            }
+        });
+    }
+
     private boolean inputs_validated() {
         String email = layout.etEmail.getText().toString().trim();
         if (email.length() == 0 || !Util.isValidEmail(email)) {
@@ -111,5 +156,56 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
         }
 
         return true;
+    }
+
+    void getUserDetailFromFB() {
+        alert.setType(CustomAlert.PROGRESS);
+        alert.show();
+        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                String name = null, picture = null, email = null;
+                try {
+                    name = object.getString("name");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    email = object.getString("email");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    picture = String.format("https://graph.facebook.com/%s/picture?type=large", object.getString("id"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                saveUser(name, email, picture);
+            }
+        });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "name,email");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
+
+    void saveUser(String name, String email, String picture) {
+        User user = User.getCurrentUser();
+        user.setName(name);
+        user.setEmail(email);
+        user.setProfileImage(picture);
+        user.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+
+                alert.dismiss();
+                //continue
+                getFragmentManager().beginTransaction().replace(R.id.container, new TypeFragment()).commit();
+
+
+            }
+        });
     }
 }

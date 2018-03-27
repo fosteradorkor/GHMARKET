@@ -6,12 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.mirka.app.ghmarket.DB.User;
 import com.mirka.app.ghmarket.R;
 import com.mirka.app.ghmarket.databinding.ActivityAccountBinding;
 import com.mirka.app.ghmarket.misc.CustomAlert;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -21,6 +24,7 @@ public class AccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         layout = DataBindingUtil.setContentView(this, R.layout.activity_account);
+
     }
 
     @Override
@@ -40,6 +44,14 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
+
+        //load profile image
+        //not loading fb changed something
+//        Glide.with(this).load(currentUser.getProfileImage()).into(layout.profileImage);
+
+
+
+        //saving
         layout.saveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +88,7 @@ public class AccountActivity extends AppCompatActivity {
                                         layout.setUser(User.getCurrentUser());
                                     }
                                 });
-                            }else{
+                            } else {
                                 Toast.makeText(AccountActivity.this, "Changes saved successfully", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -92,4 +104,6 @@ public class AccountActivity extends AppCompatActivity {
 
         return !empty_email && !empty_name;
     }
+
+
 }

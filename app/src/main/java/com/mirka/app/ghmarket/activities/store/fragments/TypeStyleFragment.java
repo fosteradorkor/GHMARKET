@@ -24,7 +24,10 @@ import java.util.List;
  */
 public class TypeStyleFragment extends Fragment {
 
+    public static final String TAG = "type_style";
     FragmentTypeStyleBinding layout;
+
+    String style= null, type = null;
 
     public TypeStyleFragment() {
         // Required empty public constructor
@@ -53,8 +56,10 @@ public class TypeStyleFragment extends Fragment {
     }
 
     private void setup() {
-        String type = getArguments().getString(Product.KEY_PRODUCT_TYPE, null);
-        String style = getArguments().getString(Product.KEY_PRODUCT_STYLE, null);
+        if (getArguments()!=null) {
+             type = getArguments().getString(Product.KEY_PRODUCT_TYPE, null);
+             style = getArguments().getString(Product.KEY_PRODUCT_STYLE, null);
+        }
 
         //title
         if (type != null)
@@ -64,7 +69,7 @@ public class TypeStyleFragment extends Fragment {
 
         Util.setUpToolbar(layout.toolbar);
         layout.toolbar.setOnMenuItemClickListener(Util.toolBarNavItemActions(getActivity()));
-
+        layout.toolbar.setNavigationIcon(null);
 
         //nav
         layout.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -80,7 +85,7 @@ public class TypeStyleFragment extends Fragment {
                 if (e == null) {
 //                    successfull query
                     layout.recycler.setLayoutManager(new GridLayoutManager(getContext(), 3));
-                    layout.recycler.setAdapter(new HomeGroupRecyclerAdapter(objects, getContext()));
+                    layout.recycler.setAdapter(new HomeGroupRecyclerAdapter(objects, getContext(), true));
 
                 }
             }

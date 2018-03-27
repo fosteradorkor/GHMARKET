@@ -9,7 +9,7 @@ import com.parse.ParseUser;
 public class User extends ParseUser {
 
 
-    private static final String KEY_PROFILE_IMAGE = "profile_image";
+    private static final String  KEY_PROFILE_IMAGE = "profile_image";
     private static final String KEY_USER_NAME = "user_name";
     private static final String KEY_NOTIFICATION_OFFERS = "notification_offers";
     private static final String KEY_NOTIFICATION_ALERTS = "notification_alerts";

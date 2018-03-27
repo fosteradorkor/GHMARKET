@@ -16,6 +16,7 @@ import com.mirka.app.ghmarket.activities.store.fragments.ExploreFragment;
 import com.mirka.app.ghmarket.activities.store.fragments.FavoritesFragment;
 import com.mirka.app.ghmarket.activities.store.fragments.HomeFragment;
 import com.mirka.app.ghmarket.activities.store.fragments.SearchFragment;
+import com.mirka.app.ghmarket.activities.store.fragments.TypeStyleFragment;
 import com.mirka.app.ghmarket.databinding.ActivityStoreBinding;
 import com.mirka.app.ghmarket.misc.FragmentAdapter;
 import com.parse.FindCallback;
@@ -46,7 +47,7 @@ public class StoreActivity extends AppCompatActivity {
 
         fragmentAdapter.addFragment(new HomeFragment(), HomeFragment.TAG);
         fragmentAdapter.addFragment(new SearchFragment(), SearchFragment.TAG);
-        fragmentAdapter.addFragment(new CategoryFragment(), CategoryFragment.TAG);
+        fragmentAdapter.addFragment(new TypeStyleFragment(), TypeStyleFragment.TAG);
         fragmentAdapter.addFragment(new FavoritesFragment(), FavoritesFragment.TAG);
 
         switchFragment(fragmentAdapter.getItem(0));

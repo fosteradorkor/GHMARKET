@@ -184,13 +184,13 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                     e.printStackTrace();
                 }
                 try {
-                    picture = String.format("https://graph.facebook.com/%s/picture?type=large", object.getString("id")) ;
+                    picture = String.format("http://graph.facebook.com/%s/picture?type=square", object.getString("id")) ;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
 
-                saveNewUser(name, email, picture);
+                saveUser(name, email, picture);
             }
         });
         Bundle parameters = new Bundle();
@@ -199,9 +199,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         request.executeAsync();
     }
 
-    void saveNewUser(String name, String email, String picture) {
+    void saveUser(String name, String email, String picture) {
         User user = User.getCurrentUser();
-        user.setUsername(name);
+        user.setName(name);
         user.setEmail(email);
         user.setProfileImage(picture);
         user.saveInBackground(new SaveCallback() {

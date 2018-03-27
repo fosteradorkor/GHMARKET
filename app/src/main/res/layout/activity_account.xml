@@ -24,19 +24,22 @@
             app:navigationIcon="@drawable/ic_android_arrow_back"
             app:title="ACCOUNT" />
 
-        <android.support.v4.widget.Space
+        <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_horizontal_margin"
             android:background="@color/m_gray" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_horizontal_margin" />
+
+
+        <ImageView
             android:id="@+id/profile_image"
-            imgUrl="@{user.profileImage}"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="2dp" />
+            android:src="@drawable/profile_photo" />
 
 
         <android.support.v4.widget.Space
