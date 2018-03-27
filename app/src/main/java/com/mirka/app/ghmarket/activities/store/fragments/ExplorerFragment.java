@@ -81,7 +81,7 @@ public class ExplorerFragment extends Fragment {
         layout.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().onBackPressed();
+              getFragmentManager().popBackStack();
             }
         });
 
@@ -119,4 +119,6 @@ public class ExplorerFragment extends Fragment {
         this.title = title.toUpperCase();
 
     }
+
+
 }

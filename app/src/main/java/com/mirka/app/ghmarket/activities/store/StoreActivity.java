@@ -35,7 +35,6 @@ public class StoreActivity extends AppCompatActivity {
 
         switchFragment(fragmentAdapter.getItem(0), (String) fragmentAdapter.getPageTitle(0));
 
-
     }
 
 
@@ -55,22 +54,51 @@ public class StoreActivity extends AppCompatActivity {
         });
     }
 
-    void switchFragment(Fragment fragment, String tag) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, fragment, tag)
-                .commit();
+    boolean switchFragment(Fragment fragment, String tag) {
+        boolean popped = getSupportFragmentManager().popBackStackImmediate(tag, 0);
+        if (!popped)
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .addToBackStack(tag)
+                    .replace(R.id.container, fragment, tag)
+                    .commit();
+
+        //syncing bottom nav
+        // TODO: 3/27/2018 this is redundant change signature of #switchFragment to switchFragment(int position)
+        int position = 0;
+        switch (tag){
+            case HomeFragment.TAG:
+                position = 0;
+                break;
+            case SearchFragment.TAG:
+                position = 1;
+                break;
+            case ExplorerFragment.TAG:
+                position = 2;
+                break;
+            case FavoritesFragment.TAG:
+                position = 3;
+                break;
+        }
+
+//        layout.navigation.getMenuItemId(position);
+
+
+        return popped;
+
     }
 
     @Override
     public void onBackPressed() {
-        HomeFragment myFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag(HomeFragment.TAG);
+        boolean switched = switchFragment(fragmentAdapter.getItem(0), (String) fragmentAdapter.getPageTitle(0));
+        if (!switched) {
+            finish();
+        }else{
+            layout.navigation.setSelectedIndex(0, true);
 
-        if (!((myFragment != null && myFragment.isVisible())))
-            findViewById(layout.navigation.getMenuItemId(0)).performClick();
-        else {
-            super.onBackPressed();
         }
-
     }
+
+
+
 }

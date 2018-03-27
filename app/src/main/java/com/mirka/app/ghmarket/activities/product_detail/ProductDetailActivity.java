@@ -79,6 +79,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+        layout.toolbar.setOnMenuItemClickListener(Util.toolBarNavItemActions(this));
 
         model.getProduct(product_id).observe(this, new Observer<Product>() {
             @Override

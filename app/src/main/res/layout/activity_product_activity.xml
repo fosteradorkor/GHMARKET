@@ -50,10 +50,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textColor="@color/black.main"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="@{product.title}"
+                        android:textColor="@color/black.main"
                         android:textSize="16sp" />
 
                     <android.support.v4.widget.Space
@@ -64,10 +64,10 @@
                     <TextView
                         android:id="@+id/tv_cost"
                         cost="@{product.price}"
-                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black.main"
+                        android:textStyle="bold"
                         tools:text="GHC 12" />
                 </LinearLayout>
 
@@ -99,20 +99,35 @@
 
                 </FrameLayout>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/list_colors"
+
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:background="@color/white.main"
-                    android:orientation="horizontal"
-                    android:padding="8dp"
-                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_colors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+                </FrameLayout>
+
 
                 <View
-                    android:background="@color/black.sub"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"/>
+                    android:layout_height="0.5dp"
+                    android:background="@color/black.sub" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:background="@color/white.main"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/list_sizes"
@@ -124,6 +139,8 @@
                     android:padding="8dp"
                     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                     tools:orientation="horizontal" />
+
+                </FrameLayout>
 
 
                 <TextView
