@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="product"
+            type="com.mirka.app.ghmarket.DB.Product"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            tools:src="@drawable/slide_1"
+            android:id="@+id/iv_main_image"
+            android:scaleType="centerCrop"
+            imgUrl="@{product.images[0]}"
+            android:layout_width="@dimen/product_width_sm"
+            android:layout_height="@dimen/product_width_sm" />
+
+        <LinearLayout
+            android:layout_margin="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="101dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                tools:text="@{product.title}" />
+
+            <TextView
+                android:id="@+id/tv_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="0"
+                android:textColor="@color/black.main"
+                android:textSize="16sp"
+                cost="@{product.price}"
+                tools:text="Belt" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

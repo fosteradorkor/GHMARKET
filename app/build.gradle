@@ -1,0 +1,122 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.mirka.app.ghmarket"
+        minSdkVersion 17
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'LOCAL_SERVER', "\"http://${getIP()}:8089/parse\""
+
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    android {
+        dataBinding {
+            enabled = true
+        }
+    }
+}
+
+// Get the ip address by interface name
+static def getLocalIp(String interfaceName) {
+    try {
+
+        NetworkInterface iface = NetworkInterface.getByName(interfaceName);
+        for (InterfaceAddress address : iface.getInterfaceAddresses()) {
+            String ip = address.getAddress().getHostAddress()
+            if (ip.length() <= 15) {
+                return ip;
+            }
+        }
+
+    } catch (Exception e) {
+        return ""
+    }
+
+}
+
+static def getIP() {
+    InetAddress result = null;
+    Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+    while (interfaces.hasMoreElements()) {
+        Enumeration<InetAddress> addresses = interfaces.nextElement().getInetAddresses();
+        while (addresses.hasMoreElements()) {
+            InetAddress address = addresses.nextElement();
+            if (!address.isLoopbackAddress()) {
+                if (address.isSiteLocalAddress()) {
+                    return address.getHostAddress();
+                } else if (result == null) {
+                    result = address;
+                }
+            }
+        }
+    }
+    return (result != null ? result : InetAddress.getLocalHost()).getHostAddress();
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:support-vector-drawable:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    //facebook
+    compile ("com.parse:parsefacebookutils-v4-android:1.10.3@aar"){
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    //gson
+    compile 'com.google.code.gson:gson:2.8.2'
+
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    // alternatively, just ViewModel
+    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+    // alternatively, just LiveData
+    implementation "android.arch.lifecycle:livedata:1.1.1"
+
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //parse stuff
+    implementation 'com.parse:parse-android:1.15.8'
+
+    //carousel
+    implementation 'com.synnapps:carouselview:0.1.4'
+
+    //progress loader
+    implementation 'com.leo.simplearcloader:simplearcloader:1.0.+'
+
+    //dialog plus
+    api 'com.orhanobut:dialogplus:1.11@aar'
+
+    //bottom navigation
+    api 'it.sephiroth.android.library.bottomnavigation:bottom-navigation:2.0.1-rc1'
+
+
+}

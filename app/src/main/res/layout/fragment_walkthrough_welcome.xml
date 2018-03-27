@@ -1,0 +1,87 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities.walkthrough.fragments.WelcomeFragment">
+
+        <!--background-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foreground="#31000000"
+            android:scaleType="centerCrop"
+            android:src="@drawable/welcome_bg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:text="@string/welcome_to"
+                android:textColor="@color/white.main"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/white.main"
+                android:textSize="36sp" />
+
+            <View
+                android:layout_width="150dp"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="8dp"
+                android:alpha="0.8"
+                android:background="@color/white.main" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.84" />
+
+            <Button
+                android:id="@+id/btn_continue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="42dp"
+                android:layout_marginRight="42dp"
+                android:background="@drawable/btn_continue_walkthrough_bg"
+                android:padding="16dp"
+                android:text="@string/continue_"
+                android:textColor="@color/white.main" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.19" />
+
+            <TextView
+                android:id="@+id/btn_sign_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.5"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/already_have_an_account"
+                android:textColor="@color/white.main"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
+    </FrameLayout>
+</layout>

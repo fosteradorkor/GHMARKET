@@ -1,0 +1,23 @@
+{
+  "title": "adidas Men's Energy Cloud Wtc m Running Shoe",
+  "images": [
+    "https://images-na.ssl-images-amazon.com/images/I/410-6irxAoL._US500_.jpg",
+    "https://images-na.ssl-images-amazon.com/images/I/51rIxxrDMfL._US500_.jpg",
+    "",
+    ""
+  ],
+  "price": 0.00,
+  "d_price": 0.00,
+  "shipping": "",
+  "type": "",
+  "style": "",
+  "variations": [
+    {
+      "title": "",
+      "values": [],
+      "type": ""
+    }
+  ]
+}
+
+//type of variation   0= images, 1= strings

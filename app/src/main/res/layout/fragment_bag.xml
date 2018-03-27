@@ -1,0 +1,190 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="order"
+            type="com.mirka.app.ghmarket.DB.Order" />
+
+        <import type="android.view.View" />
+
+        <import type="java.lang.String" />
+
+        <import type="java.lang.Math" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#dedede"
+        tools:context="com.mirka.app.ghmarket.activities.checkout.fragments.BagFragment">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white.main"
+            app:navigationIcon="@drawable/ic_android_arrow_back"
+            app:title="@string/checkout" />
+
+
+        <ScrollView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/btn_continue"
+            android:layout_below="@id/toolbar"
+            android:visibility="@{order==null? View.GONE: View.VISIBLE}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white.main"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+
+                <TextView
+                    android:id="@+id/promo_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/promotion_code"
+                    android:textColor="@color/black.main" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@color/white.main"
+                        android:hint="Enter code"
+                        android:padding="4dp"
+                        android:textSize="14sp" />
+
+                    <Button
+                        android:id="@+id/btn_apply_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="4dp"
+                        android:layout_weight="0"
+                        android:background="@color/black.main"
+                        android:text="APPLY"
+                        android:textColor="@color/white.main" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white.main">
+
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white.main">
+
+                        <TableRow android:layout_margin="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/original_price" />
+
+                            <TextView
+                                android:id="@+id/tv_original_price"
+                                android:text="@{String.valueOf(order.totalPrice)}" />
+
+                        </TableRow>
+
+                        <TableRow android:layout_margin="8dp">
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/discount" />
+
+                            <TextView
+                                android:id="@+id/tv_discount"
+                                android:text="@{String.valueOf(order.discountedPrice)}" />
+
+                        </TableRow>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.8dp"
+                            android:background="@color/black.sub" />
+
+
+                        <TableRow android:layout_margin="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/total_price"
+                                android:textColor="@color/black.main"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tv_total"
+                                android:text="@{String.valueOf(Math.min(order.totalPrice, order.discountedPrice))}" />
+
+                        </TableRow>
+                    </TableLayout>
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+        <Button
+            android:id="@+id/btn_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/black.main"
+            android:text="@string/continue_"
+            android:textColor="@color/white.main"
+            android:visibility="@{order==null? View.GONE: View.VISIBLE}" />
+
+        <TextView
+
+            style="@style/Base.DialogWindowTitle.AppCompat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+
+            android:gravity="center"
+            android:text="@string/empty_bag"
+            android:textColor="@color/black.main"
+            android:textSize="32sp"
+            android:visibility="@{order!=null? View.GONE: View.VISIBLE}" />
+
+    </RelativeLayout>
+</layout>

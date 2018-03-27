@@ -1,0 +1,91 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="180dp"
+        android:background="@color/white.main"
+        android:orientation="vertical"
+        tools:context="com.mirka.app.ghmarket.misc.CustomAlert">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="12dp"
+            android:textAllCaps="true"
+            android:textSize="22sp"
+            tools:text="Tittle" />
+
+
+        <ViewSwitcher
+            android:layout_weight="1"
+            android:id="@+id/switcher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.leo.simplearcloader.SimpleArcLoader
+                    android:id="@+id/loader"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:visibility="visible"
+                    app:arc_margin="3dp"
+                    app:arc_speed="medium"
+                    app:arc_style="simple_arc" />
+
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:textSize="18sp"
+                    tools:text="content description godes here" />
+
+
+                <TextView
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/black.main"
+                    android:gravity="center_horizontal"
+                    android:padding="12dp"
+                    android:textColor="@color/white.main"
+                    android:textSize="18sp"
+                    tools:text="OKAY" />
+
+            </LinearLayout>
+
+
+        </ViewSwitcher>
+
+
+    </LinearLayout>
+
+
+</layout>
+
+
+
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#000000</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="white.main">#fff</color>
+    <color name="white.sub">#7bffffff</color>
+    <color name="black.main">#000</color>
+    <color name="black.sub">#dfdfdf</color>
+    <color name="facebook_bg">#3b5997</color>
+</resources>

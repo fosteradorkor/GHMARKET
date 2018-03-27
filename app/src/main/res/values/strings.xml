@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">GH MARKET</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_init_walkthrough">InitWalkthroughActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello  blank fragment</string>
+    <string name="welcome_to">WELCOME TO</string>
+    <string name="continue_">CONTINUE</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="parse_app_id">APPLICATION_ID</string>
+    <string name="parse_server_url"></string>
+    <string name="parse_server_url_local">http://%s/parse/</string>
+
+
+    <string name="walkthrough_text_1">SUMMER\n LOOKBOOK</string>
+    <string name="walkthrough_text_2">2015\n SUMMERTIME</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_email">Email address</string>
+    <string name="title_please_wait">Please wait</string>
+    <string name="try_again">OK, Try again</string>
+
+
+    <!--error strings-->
+    <string name="signin_error">Sign in error!</string>
+    <string name="name_empty">Name can not be empty</string>
+    <string name="invalid_email">Invalid email address</string>
+    <string name="title_activity_store">StoreActivity</string>
+    <string name="title_home">HOME</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="text_sport">SPORT</string>
+    <string name="text_classical">CLASSICAL</string>
+    <string name="text_casual">CASUAL</string>
+    <string name="title_search">SEARCH</string>
+    <string name="title_explore">EXPLORE</string>
+    <string name="title_favorites">FAVORITES</string>
+    <string name="men">MEN</string>
+    <string name="women">WOMEN</string>
+    <string name="kids">KIDS</string>
+    <string name="baby">BABY</string>
+    <string name="add_to_bag">Add to bag</string>
+    <string name="placeholder_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="network_error">Please check your internet connection!</string>
+    <string name="logout">Logout</string>
+    <string name="store">Bag</string>
+    <string name="checkout">CHECKOUT</string>
+    <string name="promotion_code">PROMOTION CODE</string>
+    <string name="original_price">Original Price</string>
+    <string name="discount">Discount</string>
+    <string name="empty_bag">No items in Bag</string>
+    <string name="ghc">GH₵%s</string>
+    <string name="added_to_bag">Added to bag</string>
+    <string name="total_price">Total Price</string>
+    <string name="payment_info">PAYMENT INFO</string>
+
+    <string name="facebook_app_id">190286125082812</string>
+    <string name="fb_login_protocol_scheme">fb190286125082812</string>
+    <string name="PRODUCTION_APP_SERVER">https://foster-ghmarket.herokuapp.com/parse</string>
+    <string name="PRODUCTION_APP_ID">ghmarket</string>
+</resources>

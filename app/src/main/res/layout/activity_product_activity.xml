@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.mirka.app.ghmarket.DB.Product" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black.sub"
+        android:orientation="vertical"
+        tools:context="com.mirka.app.ghmarket.activities.product_detail.ProductDetailActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white.main"
+            android:title="@{product.productType.toUpperCase()}" />
+
+        <android.support.v4.widget.NestedScrollView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <!--title and cost-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white.main"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black.main"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@{product.title}"
+                        android:textSize="16sp" />
+
+                    <android.support.v4.widget.Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_cost"
+                        cost="@{product.price}"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black.main"
+                        tools:text="GHC 12" />
+                </LinearLayout>
+
+                <!--main image-->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/product_detail_image_height"
+                    android:background="@color/white.main">
+
+                    <com.synnapps.carouselview.CarouselView
+                        android:id="@+id/carousel"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|top"
+                        android:layout_margin="8dp"
+                        android:background="@android:color/transparent"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_ios_heart_outline"
+                        android:tint="@color/black.main" />
+
+
+                </FrameLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list_colors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/white.main"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+                <View
+                    android:background="@color/black.sub"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list_sizes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/white.main"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    tools:orientation="horizontal" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white.main"
+                    android:padding="8dp"
+                    android:text="DESCRIPTION"
+                    android:textColor="@color/black.main"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white.main"
+                    android:padding="8dp"
+                    tools:text="@{product.description}" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white.main"
+                    android:padding="8dp"
+                    android:text="MATERIAL"
+                    android:textColor="@color/black.main"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_material"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white.main"
+                    android:padding="8dp"
+                    tools:text="@{product.material}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:background="@color/white.main"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="true"
+                        tools:text="title" />
+
+                    <android.support.v4.widget.Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/btn_see_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See all"
+                        android:textColor="@color/black.main"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_recommended"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white.main"
+                    android:orientation="horizontal"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+
+            </LinearLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/add_to_bag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black.main"
+            android:text="@string/add_to_bag"
+            android:textColor="@color/white.main" />
+
+    </LinearLayout>
+</layout>

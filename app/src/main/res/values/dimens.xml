@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="signup_button_margins">16dp</dimen>
+    <dimen name="signup_drawable_padding">8dp</dimen>
+    <dimen name="welcome_carousel_height">250dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="product_width_sm">120dp</dimen>
+    <dimen name="product_detail_image_height">250dp</dimen>
+    <dimen name="badge_text_size">12sp</dimen>
+
+
+</resources>
