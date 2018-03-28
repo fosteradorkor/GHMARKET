@@ -24,6 +24,7 @@ import com.mirka.app.ghmarket.R;
 import com.mirka.app.ghmarket.activities.account.AccountActivity;
 import com.mirka.app.ghmarket.activities.account.NotificationsActivity;
 import com.mirka.app.ghmarket.activities.checkout.CheckoutActivity;
+import com.mirka.app.ghmarket.activities.purchases.OrdersActivity;
 import com.mirka.app.ghmarket.databinding.LayoutSlideBinding;
 import com.synnapps.carouselview.ViewListener;
 
@@ -162,7 +163,9 @@ public class Util {
                     case R.id.context_account:
                         context.startActivity(new Intent(context, AccountActivity.class));
                         return true;
-
+                    case R.id.context_purchases:
+                        context.startActivity(new Intent(context, OrdersActivity.class));
+                        return true;
                     case R.id.context_notification:
                         context.startActivity(new Intent(context, NotificationsActivity.class));
                         return true;

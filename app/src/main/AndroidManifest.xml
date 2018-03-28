@@ -57,7 +57,9 @@
         <activity android:name=".activities.checkout.CheckoutActivity" />
         <activity android:name=".activities.account.AccountActivity" />
         <activity android:name=".activities.account.NotificationsActivity" />
-        <activity android:name=".activities.account.PurchasesActivity"></activity>
+        <activity android:name=".activities.account.PurchasesActivity" />
+        <activity android:name=".activities.purchases.OrdersActivity" />
+        <activity android:name=".activities.purchases.OrderDetailActivity"></activity>
     </application>
 
 </manifest>

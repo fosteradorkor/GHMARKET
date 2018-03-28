@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.ProfileTracker;
 import com.mirka.app.ghmarket.BR;
 import com.mirka.app.ghmarket.DB.Order;
 import com.mirka.app.ghmarket.DB.Product;
@@ -23,6 +24,8 @@ import com.mirka.app.ghmarket.misc.BindingViewHolder;
 import com.mirka.app.ghmarket.misc.Util;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.ImageListener;
@@ -50,6 +53,11 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         layout = DataBindingUtil.setContentView(this, R.layout.activity_product_activity);
 
+//        null check
+        if (getIntent().getExtras() == null) {
+            finish();
+            return;
+        }
         product_id = getIntent().getExtras().getString(PRODUCT_ID, null);
 
         if (product_id == null) {
@@ -80,104 +88,124 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void complete(final Product product, Exception e) {
 
-                if (e!=null) return;
+                if (e != null) return;
 //                product  databinding
-                layout.setProduct(product);
+                updateUI(product);
+
+            }
+        });
+
+    }
 
 
-                layout.carousel.setImageListener(new ImageListener() {
-                    @Override
-                    public void setImageForPosition(int position, ImageView imageView) {
-                        Picasso.get().load(product.getImages().get(position)).into(imageView);
-                    }
-                });
-                layout.carousel.setPageCount(product != null ? product.getImages().size() : 0);
+    /**
+     * updates the product detail view
+     * @param product
+     */
+    private void updateUI(final Product product) {
+        layout.setProduct(product);
 
-                //variations
-                if (product.getSizes().size() != 0)
-                    layout.listSizes.setAdapter(new VariationRecyclerAdapter(product.getSizes(), R.layout.recycler_item_variation_size));
-                if (product.getColors().size() != 0)
-                    layout.listColors.setAdapter(new VariationRecyclerAdapter(product.getColors(), R.layout.recycler_item_variation_color));
+        layout.carousel.setImageListener(new ImageListener() {
+            @Override
+            public void setImageForPosition(int position, ImageView imageView) {
+                Picasso.get().load(product.getImages().get(position)).into(imageView);
+            }
+        });
+        layout.carousel.setPageCount(product != null ? product.getImages().size() : 0);
 
-                //recommended products
-                Product.getSimilarProducts(product).findInBackground(new FindCallback<Product>() {
-                    @Override
-                    public void done(List<Product> products, ParseException e) {
-                        if (e == null)
-                            layout.rvRecommended.setAdapter(new HomeGroupRecyclerAdapter(products, ProductDetailActivity.this));
+        //variations
+        if (product.getSizes().size() != 0)
+            layout.listSizes.setAdapter(new VariationRecyclerAdapter(product.getSizes(), R.layout.recycler_item_variation_size));
+        if (product.getColors().size() != 0)
+            layout.listColors.setAdapter(new VariationRecyclerAdapter(product.getColors(), R.layout.recycler_item_variation_color));
 
-                    }
-                });
-
-
-                //add to cart
-                layout.addToBag.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Order.getBag(new Order.OnComplete() {
-                            @Override
-                            public void complete(Order order, Exception exception) {
-
-                                Purchase new_purchase = new Purchase(product, null, null);
-
-                                order.addProduct(new_purchase);
-                                order.setTotalPrice(order.getTotalPrice() + product.getPrice());
-
-                                //apply discount if there is a discount
-                                if (product.getDiscountedPrice() > 0)
-                                    order.setDiscountedPrice(order.getDiscountedPrice() + product.getDiscountedPrice());
-                                else
-                                    order.setDiscountedPrice(order.getDiscountedPrice() + product.getPrice());
-
-                                order.saveInBackground(new SaveCallback() {
-                                    @Override
-                                    public void done(ParseException e) {
-                                        //updating toolbar
-                                        Util.setUpToolbar(layout.toolbar);
-
-                                        Toast.makeText(ProductDetailActivity.this, R.string.added_to_bag, Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
-
-                layout.isFavorite.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        User currentUser = User.getCurrentUser();
-                        if (isFavorite(product))
-                            currentUser.removeFromFavorites(product);
-                        else
-                            currentUser.addToFavorites(product);
-
-                        //updating records
-                        currentUser.saveInBackground(new SaveCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                if (e == null) {
-                                    layout.isFavorite.setImageResource(isFavorite(product) ? R.drawable.ic_ios_heart : R.drawable.ic_ios_heart_outline);
-                                }
-                            }
-                        });
-
-                    }
-                });
-
-                //update toolbar
-                Util.setUpToolbar(layout.toolbar);
-
-                layout.isFavorite.setImageResource(isFavorite(product) ? R.drawable.ic_ios_heart : R.drawable.ic_ios_heart_outline);
+        //recommended products
+        Product.getSimilarProducts(product).findInBackground(new FindCallback<Product>() {
+            @Override
+            public void done(List<Product> products, ParseException e) {
+                if (e == null)
+                    layout.rvRecommended.setAdapter(new HomeGroupRecyclerAdapter(products, ProductDetailActivity.this));
 
             }
         });
 
 
+        //add to cart
+        layout.addToBag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addToBag(product);
+            }
+        });
+
+        layout.isFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                togleFavorite(product);
+
+            }
+        });
+
+        //update toolbar
+        Util.setUpToolbar(layout.toolbar);
+
+        layout.isFavorite.setImageResource(isFavorite(product) ? R.drawable.ic_ios_heart : R.drawable.ic_ios_heart_outline);
+    }
+
+
+
+    private void addToBag(final Product product) {
+        Order.getBag(new Order.OnComplete() {
+            @Override
+            public void complete(Order order, Exception exception) {
+
+                Purchase new_purchase = new Purchase(product, null, null);
+
+                order.addProduct(new_purchase);
+
+                order.setTotalPrice(order.getTotalPrice() + product.getPrice());
+                order.setDisplayImage(product.getImages().get(0));
+
+                //apply discount if there is a discount
+                if (product.getDiscountedPrice() > 0)
+                    order.setDiscountedPrice(order.getDiscountedPrice() + product.getDiscountedPrice());
+                else
+                    order.setDiscountedPrice(order.getDiscountedPrice() + product.getPrice());
+
+                order.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        //updating toolbar
+                        Util.setUpToolbar(layout.toolbar);
+
+                        Toast.makeText(ProductDetailActivity.this, R.string.added_to_bag, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+
+    private void togleFavorite(final Product product) {
+        User currentUser = User.getCurrentUser();
+        if (isFavorite(product))
+            currentUser.removeFromFavorites(product);
+        else
+            currentUser.addToFavorites(product);
+
+        //updating records
+        currentUser.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    layout.isFavorite.setImageResource(isFavorite(product) ? R.drawable.ic_ios_heart : R.drawable.ic_ios_heart_outline);
+                }
+            }
+        });
     }
 
     /**
-     * che
+     * checks if the product is marked as favorite
      *
      * @param product
      * @return

@@ -45,19 +45,19 @@ public class App extends Application {
 
 
 //
-        if (BuildConfig.DEBUG) {
-//            local testing
-            Parse.initialize(new Parse.Configuration.Builder(this)
-                    .applicationId(getString(R.string.parse_app_id))
-                    .server(BuildConfig.LOCAL_SERVER)
-                    .build());
-        } else {
+//        if (BuildConfig.DEBUG) {
+////            local testing
+//            Parse.initialize(new Parse.Configuration.Builder(this)
+//                    .applicationId(getString(R.string.parse_app_id))
+//                    .server(BuildConfig.LOCAL_SERVER)
+//                    .build());
+//        } else {
 //            live server
             Parse.initialize(new Parse.Configuration.Builder(this)
                     .applicationId(getString(R.string.PRODUCTION_APP_ID))
                     .server(getString(R.string.PRODUCTION_APP_SERVER))
                     .build());
-        }
+//        }
 
         ParseFacebookUtils.initialize(this);
 

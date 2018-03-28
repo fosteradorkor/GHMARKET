@@ -65,7 +65,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="@android:color/holo_red_dark"
-                    android:visibility="@{product.discountedPrice==0?View.GONE:View.VISIBLE}"
+                    android:visibility="@{product.discountedPrice &gt; 0 &amp;&amp; product.discountedPrice &lt; product.price ?View.VISIBLE:View.GONE}"
                     tools:text="GHC 20" />
 
             </LinearLayout>

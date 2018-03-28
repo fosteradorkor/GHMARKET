@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mirka.app.ghmarket.DB.Product;
-import com.mirka.app.ghmarket.DB.User;
 import com.mirka.app.ghmarket.R;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
@@ -58,11 +57,21 @@ public class BindingAdapters {
         if (product != null) {
             Context c = textView.getContext();
             textView.setText(c.getString(R.string.ghc, new DecimalFormat("#.00").format(product.getPrice())));
-            if (product.getDiscountedPrice() > 0)
-                textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            strikeThrough(textView, product.getDiscountedPrice() < product.getPrice() && product.getDiscountedPrice() != 0);
+
         }
+    }
+
+
+
+
+    @BindingAdapter("strikeThrough")
+    public static void strikeThrough(TextView textView, boolean strikeThrough) {
+        if (strikeThrough)
+            textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
     }
+
 
     @BindingAdapter("discountedPrice")
     public static void setDiscountedPrice(TextView textView, Product product) {
@@ -76,7 +85,6 @@ public class BindingAdapters {
 
     @BindingAdapter("isFavorite")
     public static void favorite(ImageButton imgButton, Product product) {
-
 
 
     }

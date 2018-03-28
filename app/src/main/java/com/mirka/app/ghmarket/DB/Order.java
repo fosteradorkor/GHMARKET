@@ -1,5 +1,6 @@
 package com.mirka.app.ghmarket.DB;
 
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
@@ -27,6 +28,7 @@ public class Order extends ParseObject {
     private static final String KEY_OWNER = "owner";
     private static final String KEY_DISCOUNTED_PRICE = "discounted_price";
     private static final String KEY_TOTAL_PRICE = "total_price";
+    private static final String KEY_DISPLAY_IMG = "dis_img";
 
     static DecimalFormat df = new DecimalFormat("#.00");
 
@@ -55,6 +57,13 @@ public class Order extends ParseObject {
                 });
     }
 
+    public static void getOrders(FindCallback<Order> callback) {
+        getQuery()
+                .whereEqualTo(KEY_OWNER, User.getCurrentUser())
+                .whereEqualTo(KEY_PLACED, true)
+                .findInBackground(callback);
+    }
+
     public List<Purchase> getProducts() {
         JSONArray jsonArray = getJSONArray(KEY_PRODUCTS);
         List<Purchase> purchases = new ArrayList<>();
@@ -76,7 +85,7 @@ public class Order extends ParseObject {
 
     //total price
     public void setTotalPrice(double value) {
-        String d =  new DecimalFormat("#.00").format(value);
+        String d = new DecimalFormat("#.00").format(value);
         put(KEY_TOTAL_PRICE, Double.parseDouble(d));
     }
 
@@ -86,7 +95,7 @@ public class Order extends ParseObject {
     }
 
     public void setDiscountedPrice(double value) {
-        String d =  df.format(value);
+        String d = df.format(value);
         put(KEY_DISCOUNTED_PRICE, Double.parseDouble(d));
     }
 
@@ -108,6 +117,8 @@ public class Order extends ParseObject {
 
     }
 
+
+
     /**
      * removes product from orders and update prices
      *
@@ -125,7 +136,7 @@ public class Order extends ParseObject {
                 String id = Purchase.fromJson(jsonArray.getString(i)).getProduct_id();
                 String _id = product.getObjectId();
 
-                if (!Purchase.fromJson(jsonArray.getString(i)).getProduct_id().equals(product.getObjectId()) ) {
+                if (!Purchase.fromJson(jsonArray.getString(i)).getProduct_id().equals(product.getObjectId())) {
                     new_jsonArray.put(jsonArray.get(i));
                 }
             } catch (JSONException e) {
@@ -161,6 +172,18 @@ public class Order extends ParseObject {
         put(KEY_PLACED, placed);
     }
 
+    public String getDisplayImage() {
+        return getString(KEY_DISPLAY_IMG);
+    }
+
+    public void setDisplayImage(String value) {
+        put(KEY_DISPLAY_IMG, value);
+    }
+
+
+    /**
+     * oncontinue interface
+     */
     public interface OnComplete {
         void complete(Order order, Exception exception);
     }

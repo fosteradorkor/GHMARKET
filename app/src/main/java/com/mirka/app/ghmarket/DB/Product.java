@@ -137,9 +137,6 @@ public class Product extends ParseObject {
 
     //    discounted price
     public double getDiscountedPrice() {
-        String d = getString(KEY_DISCOUNTED_PRICE);
-        if (d != null && !d.isEmpty())
-            return Double.parseDouble(d);
         return getDouble(KEY_DISCOUNTED_PRICE);
     }
 
