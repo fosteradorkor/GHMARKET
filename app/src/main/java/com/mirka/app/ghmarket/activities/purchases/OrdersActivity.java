@@ -1,10 +1,12 @@
 package com.mirka.app.ghmarket.activities.purchases;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.mirka.app.ghmarket.DB.Order;
@@ -82,8 +84,20 @@ public class OrdersActivity extends AppCompatActivity {
                 bind(((RecyclerItemOrderBinding) holder.getBinding()), o);
         }
 
-        private void bind(RecyclerItemOrderBinding binding, Order order) {
+        private void bind(RecyclerItemOrderBinding binding, final Order order) {
             binding.setOrder(order);
+            binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle b = new Bundle();
+                    b.putString(OrderDetailActivity.KEY_ORDER, order.getObjectId());
+                    Intent i = new Intent(OrdersActivity.this, OrderDetailActivity.class);
+                    i.putExtras(b);
+
+                    startActivity(i);
+
+                }
+            });
         }
 
 

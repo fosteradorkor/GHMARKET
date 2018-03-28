@@ -10,8 +10,6 @@ import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
 
 /**
@@ -44,14 +42,13 @@ public class App extends Application {
 
 
 
-//
-//        if (BuildConfig.DEBUG) {
-////            local testing
-//            Parse.initialize(new Parse.Configuration.Builder(this)
-//                    .applicationId(getString(R.string.parse_app_id))
-//                    .server(BuildConfig.LOCAL_SERVER)
-//                    .build());
-//        } else {
+        if (BuildConfig.DEBUG)
+//           local testing
+            Parse.initialize(new Parse.Configuration.Builder(this)
+                    .applicationId(getString(R.string.parse_app_id))
+                    .server(BuildConfig.LOCAL_SERVER)
+                    .build());
+        else
 //            live server
             Parse.initialize(new Parse.Configuration.Builder(this)
                     .applicationId(getString(R.string.PRODUCTION_APP_ID))
@@ -60,7 +57,6 @@ public class App extends Application {
 //        }
 
         ParseFacebookUtils.initialize(this);
-
 
 
     }

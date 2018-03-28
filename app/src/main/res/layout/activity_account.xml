@@ -34,12 +34,29 @@
             android:layout_height="@dimen/activity_horizontal_margin" />
 
 
-        <ImageView
+        <com.facebook.login.widget.ProfilePictureView
             android:id="@+id/profile_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/profile_photo" />
+            android:background="@drawable/circle"
+            android:visibility="gone" />
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/profileImg"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_ios_person_outline"
+            app:civ_border="true"
+            app:civ_border_color="@color/black.sub"
+            app:civ_border_width="2dp" />
+        <!--<ImageView-->
+        <!--android:id="@+id/profile_image"-->
+        <!--android:layout_width="150dp"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:src="@drawable/profile_photo" />-->
 
 
         <android.support.v4.widget.Space

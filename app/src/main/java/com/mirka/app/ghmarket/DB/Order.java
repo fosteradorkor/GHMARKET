@@ -179,7 +179,7 @@ public class Order extends ParseObject {
     }
 
     public double getShipping() {
-        return 0.2 * getTotalPrice();
+        return  Double.parseDouble(df.format(0.2 * getTotalPrice()));
     }
 
 

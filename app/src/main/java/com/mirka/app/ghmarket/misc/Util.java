@@ -18,6 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.internal.ImageDownloader;
+import com.facebook.internal.ImageRequest;
+import com.facebook.internal.ImageResponse;
 import com.mirka.app.ghmarket.DB.Order;
 import com.mirka.app.ghmarket.DB.User;
 import com.mirka.app.ghmarket.R;
@@ -174,5 +177,18 @@ public class Util {
                 return false;
             }
         };
+    }
+
+    public static void getProfilePic(Context context , String userId, ImageRequest.Callback callback){
+        ImageRequest.Builder requestBuilder = new ImageRequest.Builder(
+                context,
+                ImageRequest.getProfilePictureUri(userId, 200, 200));
+
+        ImageRequest request = requestBuilder.setAllowCachedRedirects(true)
+                .setCallerTag(context)
+                .setCallback(callback)
+                .build();
+
+        ImageDownloader.downloadAsync(request);
     }
 }

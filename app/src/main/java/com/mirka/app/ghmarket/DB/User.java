@@ -3,7 +3,9 @@ package com.mirka.app.ghmarket.DB;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Foster on 3/20/2018.
@@ -18,6 +20,8 @@ public class User extends ParseUser {
     private static final String KEY_NOTIFICATION_ALERTS = "notification_alerts";
     private static final String KEY_NOTIFICATION_FAVORITES = "notification_favorites";
     private static final String KEY_FAVORITES = "favorites";
+    private static final String KEY_AUTH_DATA = "authData";
+
 
     public static User getCurrentUser() {
         return ((User) ParseUser.getCurrentUser());
@@ -91,6 +95,14 @@ public class User extends ParseUser {
         put(KEY_FAVORITES, favorites);
     }
 
+    public String getAuthId() {
+        Map<String, Map<String, String>> o = getMap(KEY_AUTH_DATA);
+        if (o == null)
+            return null;
+
+       return o.get("facebook").get("id");
+
+    }
 
     public void removeFromFavorites(Product product) {
         List<Product> favorites = getFavorites();

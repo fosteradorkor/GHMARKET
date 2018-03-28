@@ -211,6 +211,8 @@
                     android:background="@color/black.sub" />
 
 
+
+
                 <TableRow android:layout_margin="8dp">
 
                     <TextView
@@ -223,7 +225,7 @@
 
                     <TextView
                         android:id="@+id/tv_total"
-                        android:text="@{order.discountedPrice > 0?String.valueOf(order.discountedPrice)  :String.valueOf(order.totalPrice) }" />
+                        android:text="@{order.discountedPrice > 0?String.valueOf(order.discountedPrice + order.shipping)  :String.valueOf(order.totalPrice + order.shipping) }" />
 
                 </TableRow>
             </TableLayout>

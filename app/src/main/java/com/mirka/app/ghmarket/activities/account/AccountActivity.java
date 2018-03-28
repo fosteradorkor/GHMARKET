@@ -6,15 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.facebook.internal.ImageRequest;
+import com.facebook.internal.ImageResponse;
 import com.mirka.app.ghmarket.DB.User;
 import com.mirka.app.ghmarket.R;
 import com.mirka.app.ghmarket.databinding.ActivityAccountBinding;
 import com.mirka.app.ghmarket.misc.CustomAlert;
+import com.mirka.app.ghmarket.misc.Util;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -45,10 +45,16 @@ public class AccountActivity extends AppCompatActivity {
         });
 
 
-        //load profile image
-        //not loading fb changed something
-//        Glide.with(this).load(currentUser.getProfileImage()).into(layout.profileImage);
+        //profile image
+        layout.profileImg.setImageResource(R.drawable.ic_ios_person_outline);
 
+        Util.getProfilePic(this, currentUser.getAuthId(), new ImageRequest.Callback() {
+            @Override
+            public void onCompleted(ImageResponse response) {
+                if (response.getError() == null)
+                    layout.profileImg.setImageBitmap(response.getBitmap());
+            }
+        });
 
 
         //saving

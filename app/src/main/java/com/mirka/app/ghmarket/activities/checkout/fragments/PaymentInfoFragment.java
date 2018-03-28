@@ -55,7 +55,8 @@ public class PaymentInfoFragment extends Fragment {
                 if (order != null) {
                     layout.setOrder(order);
                     PaymentInfoFragment.this.order = order;
-                    layout.btnContinue.setText("PAY GH₵ " + order.getDiscountedPrice());
+                    String displayPrice = order.getDiscountedPrice() > 0 ? String.valueOf(order.getDiscountedPrice() + order.getShipping()) : String.valueOf(order.getTotalPrice() + order.getShipping());
+                    layout.btnContinue.setText("PAY GH₵ " + displayPrice);
 
                 }
             }
