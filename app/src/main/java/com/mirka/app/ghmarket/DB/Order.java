@@ -117,8 +117,6 @@ public class Order extends ParseObject {
 
     }
 
-
-
     /**
      * removes product from orders and update prices
      *
@@ -178,6 +176,10 @@ public class Order extends ParseObject {
 
     public void setDisplayImage(String value) {
         put(KEY_DISPLAY_IMG, value);
+    }
+
+    public double getShipping() {
+        return 0.2 * getTotalPrice();
     }
 
 

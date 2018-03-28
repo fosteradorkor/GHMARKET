@@ -3,6 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="user"
+            type="com.mirka.app.ghmarket.DB.User" />
+
+        <variable
+            name="order"
+            type="com.mirka.app.ghmarket.DB.Order" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,11 +34,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
                     android:background="@color/black.main"
                     android:padding="8dp"
                     android:text="ITEMS"
@@ -41,6 +55,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
                     android:background="@color/black.main"
                     android:padding="8dp"
                     android:text="PAYMENT INFO"
@@ -66,8 +82,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/selected_variation_bg"
-                        android:inputType="numberPassword"
-                        android:padding="4dp" />
+                        android:padding="4dp"
+                        android:text="************451" />
 
                     <android.support.v4.widget.Space
                         android:layout_width="match_parent"
@@ -95,7 +111,8 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/selected_variation_bg"
                                 android:inputType="textPersonName"
-                                android:padding="4dp" />
+                                android:padding="4dp"
+                                android:text="****" />
                         </LinearLayout>
 
                         <android.support.v4.widget.Space
@@ -119,7 +136,8 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/selected_variation_bg"
                                 android:inputType="number"
-                                android:padding="4dp" />
+                                android:padding="4dp"
+                                android:text="***" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -127,13 +145,118 @@
                 </LinearLayout>
 
 
-                <TextView
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/white.main">
+
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white.main">
+
+                        <TableRow android:layout_margin="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/original_price" />
+
+                            <TextView
+                                android:id="@+id/tv_original_price"
+                                android:text="@{String.valueOf(order.totalPrice)}" />
+
+                        </TableRow>
+
+                        <TableRow android:layout_margin="8dp">
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/discount" />
+
+                            <TextView
+                                android:id="@+id/tv_discount"
+                                android:text="@{String.valueOf(order.discountedPrice)}" />
+
+                        </TableRow>
+
+                        <TableRow android:layout_margin="8dp">
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/shipping_ups" />
+
+                            <TextView
+                                android:id="@+id/tv_shipping"
+                                android:text="@{String.valueOf(order.shipping)}" />
+
+                        </TableRow>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.8dp"
+                            android:background="@color/black.sub" />
+
+
+                        <TableRow android:layout_margin="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/total_price"
+                                android:textColor="@color/black.main"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tv_total"
+                                android:text="@{order.discountedPrice > 0?String.valueOf(order.discountedPrice)  :String.valueOf(order.totalPrice) }" />
+
+                        </TableRow>
+                    </TableLayout>
+                </FrameLayout>
+
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
                     android:background="@color/black.main"
                     android:padding="8dp"
                     android:text="SHIPPING ADDRESS"
                     android:textColor="@color/white.main" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="Name" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:padding="4dp"
+                    android:text="@{user.name}"
+                    android:textColor="@color/black.main"
+                    android:textSize="16dp"
+                    tools:text="Foster Mawuli" />
+
 
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

@@ -79,7 +79,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/selected_variation_bg"
-                        android:inputType="textPersonName" />
+                        android:inputType="number" />
                 </LinearLayout>
 
                 <android.support.v4.widget.Space
@@ -188,6 +188,22 @@
                         android:text="@{String.valueOf(order.discountedPrice)}" />
 
                 </TableRow>
+
+                <TableRow android:layout_margin="8dp">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/shipping_ups" />
+
+                    <TextView
+                        android:id="@+id/tv_shipping"
+                        android:text="@{String.valueOf(order.shipping)}" />
+
+                </TableRow>
+
 
                 <View
                     android:layout_width="match_parent"
