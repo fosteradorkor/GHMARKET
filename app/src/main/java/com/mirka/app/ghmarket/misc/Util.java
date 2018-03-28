@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import com.facebook.internal.ImageDownloader;
 import com.facebook.internal.ImageRequest;
-import com.facebook.internal.ImageResponse;
 import com.mirka.app.ghmarket.DB.Order;
 import com.mirka.app.ghmarket.DB.User;
 import com.mirka.app.ghmarket.R;
@@ -179,7 +178,8 @@ public class Util {
         };
     }
 
-    public static void getProfilePic(Context context , String userId, ImageRequest.Callback callback){
+    public static void getProfilePic(Context context, String userId, ImageRequest.Callback callback) {
+        if (userId == null || userId.isEmpty()) return;
         ImageRequest.Builder requestBuilder = new ImageRequest.Builder(
                 context,
                 ImageRequest.getProfilePictureUri(userId, 200, 200));
